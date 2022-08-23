@@ -36,9 +36,6 @@ function playRound(playerSelection, computerSelection) {
         return ('You Lose! Rocks obliterate scissors.');
     }
 }
-
-console.log(playRound(playerSelection, computerSelection));
-
 function game() {
     let playerScore = 0;
     let computerScore = 0;
