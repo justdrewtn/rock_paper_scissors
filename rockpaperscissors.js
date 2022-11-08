@@ -4,17 +4,6 @@ function getComputerChoice(string) {
     return rpsArray[Math.floor(Math.random() * rpsArray.length)];
 }
 
-function getPlayerChoice(string) {
-    return capitalize(prompt('Rock, Paper, Scissors LETS GO!'))
-}
-
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-}
-
-let playerSelection = getPlayerChoice()
-let computerSelection = getComputerChoice();
-
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
         return ('You Win! Rocks obliterate scissors.');
@@ -36,7 +25,29 @@ function playRound(playerSelection, computerSelection) {
         return ('You Lose! Rocks obliterate scissors.');
     }
 }
-function game() {
+
+window.onload=function(){
+    const rock = document.getElementById("Rock");
+
+    rock.addEventListener("click", e => {
+        console.log(playRound('Rock', getComputerChoice()));
+    });
+
+    const paper = document.getElementById("Paper");
+
+    paper.addEventListener("click", e => {
+        console.log(playRound('Paper', getComputerChoice()));
+    });
+
+    const scissors = document.getElementById("Scissors");
+
+    scissors.addEventListener("click", e => {
+        console.log(playRound('Scissors', getComputerChoice()));
+    });
+}
+
+
+/*function game() {
     let playerScore = 0;
     let computerScore = 0;
     
@@ -59,4 +70,4 @@ function game() {
     } else if (playerScore = computerScore) {
         console.log('ARGH, WE TIED!');
     }
-}
+}*/
