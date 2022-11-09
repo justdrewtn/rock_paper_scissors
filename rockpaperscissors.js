@@ -1,9 +1,13 @@
+//Function that gets random computer choice.
 function getComputerChoice(string) {
     let rpsArray = ['Rock', 'Paper', 'Scissors'];
 
     return rpsArray[Math.floor(Math.random() * rpsArray.length)];
 }
 
+let computerChoice = getComputerChoice();
+
+//Main Gameplay function.
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
         return ('You Win! Rocks obliterate scissors.');
@@ -26,48 +30,58 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-window.onload=function(){
-    const rock = document.getElementById("Rock");
+//Adds event listener to buttons
+const rock = document.getElementById("Rock");
 
-    rock.addEventListener("click", e => {
-        console.log(playRound('Rock', getComputerChoice()));
-    });
+rock.addEventListener("click", e => {
+    let result = playRound('Rock', getComputerChoice());
+    document.getElementById("Result").innerHTML = result;
+    return round(result);
+});
 
-    const paper = document.getElementById("Paper");
+const paper = document.getElementById("Paper");
 
-    paper.addEventListener("click", e => {
-        console.log(playRound('Paper', getComputerChoice()));
-    });
+paper.addEventListener("click", e => {
+    let result = playRound('Paper', getComputerChoice());
+    document.getElementById("Result").innerHTML = result;
+    return round(result);
+});
 
-    const scissors = document.getElementById("Scissors");
+const scissors = document.getElementById("Scissors");
 
-    scissors.addEventListener("click", e => {
-        console.log(playRound('Scissors', getComputerChoice()));
-    });
-}
+scissors.addEventListener("click", e => {
+    let result = playRound('Scissors', getComputerChoice());
+    document.getElementById("Result").innerHTML = result;
+    return round(result);
+});
 
+//establishes score
+let playerScore = 0;
+let computerScore = 0;
 
-/*function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    
-    for (let i = 0; i < 5; i++) {
-        let oneRound = playRound(getPlayerChoice(), getComputerChoice());
-        console.log(oneRound);
-        if ((oneRound === 'You Win! Rocks obliterate scissors.') || (oneRound === 'You Win! Paper engulfs and smothers rock.') ||(oneRound === 'You Win! Scissors shred paper.')) {
-            playerScore++;
-        } else if ((oneRound === 'You Lose! Paper engulfs and smothers rock.') || (oneRound === 'You Lose! Scissors shred paper.') ||(oneRound === 'You Lose! Rocks obliterate scissors.')) {
-            computerScore++;
-        } 
+//plays round and keeps score
+function round(result) {
+    let oneRound = result;
+
+    if ((oneRound === 'You Win! Rocks obliterate scissors.') || (oneRound === 'You Win! Paper engulfs and smothers rock.') ||(oneRound === 'You Win! Scissors shred paper.')) {
+        playerScore++;
+        document.getElementById("Total").innerHTML = 'Wins - ' + playerScore + ' Losses - ' + computerScore;
+    } else if ((oneRound === 'You Lose! Paper engulfs and smothers rock.') || (oneRound === 'You Lose! Scissors shred paper.') ||(oneRound === 'You Lose! Rocks obliterate scissors.')) {
+        computerScore++;
+        document.getElementById("Total").innerHTML = 'Wins - ' + playerScore + ' Losses - ' + computerScore;
     }
-    console.log('Wins - ' + playerScore);
-    console.log('Losses - ' + computerScore);
-
-    if (playerScore > computerScore) {
-        console.log('WELL LOOK AT THAT, YOU WON!');
-    } else if (computerScore > playerScore) {
-        console.log('WELL WELL WELL, YOU LOST!');
-    } else if (playerScore = computerScore) {
-        console.log('ARGH, WE TIED!');
+//establishes winner and resets score
+    if (playerScore === 5) {
+        document.getElementById("Result").innerHTML = 'WELL LOOK AT THAT, YOU WON THE GAME!';
+        playerScore = 0;
+        computerScore = 0;
+    } else if (computerScore === 5) {
+        document.getElementById("Result").innerHTML = 'WELL WELL WELL, YOU LOST THE GAME!';
+        playerScore = 0;
+        computerScore = 0;
+    } else if (playerScore === 5 && computerScore === 5) {
+        document.getElementById("Result").innerHTML = 'ARGH, WE TIED!';
+        playerScore = 0;
+        computerScore = 0;
     }
-}*/
+} 
